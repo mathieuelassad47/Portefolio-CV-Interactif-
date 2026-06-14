@@ -1,0 +1,17 @@
+const monParcours = [
+    { id: 1, title: "CAP Cuisine", desc: "La rigueur, l'organisation et la maîtrise des bases culinaires." },
+    { id: 2, title: "Bac Pro Service Accueil", desc: "Apprentissage du relationnel client et de la gestion de flux." },
+    { id: 3, title: "La Buvette des Montreurs", desc: "Expérience en gestion de bar et accueil du public." },
+    { id: 4, title: "Déménageur", desc: "Développement de la force physique et de l'efficacité logistique." },
+    { id: 5, title: "DJ Événementiel", desc: "Maîtrise de l'ambiance, de la technique sonore et du public." },
+    { id: 6, title: "Transition Numérique", desc: "Le début de mon virage vers le développement web." },
+    { id: 7, title: "Auto-formation Web", desc: "Exploration approfondie du HTML, CSS et JS." },
+    { id: 8, title: "Logique de code", desc: "Développement de ma pensée algorithmique." },
+    { id: 9, title: "Projet Portfolio", desc: "Création de cette interface immersive." },
+    { id: 10, title: "Maîtrise Git", desc: "Gestion structurée de mon code." },
+    { id: 11, title: "UI/UX Design", desc: "Focus sur le ressenti utilisateur." },
+    { id: 12, title: "Intégration", desc: "Mise en place de systèmes dynamiques." },
+    { id: 13, title: "Veille Technique", desc: "Suivi des évolutions du monde numérique." },
+    { id: 14, title: "Adaptabilité", desc: "Capacité à changer d'univers avec succès." },
+    { id: 15, title: "Objectif Développeur", desc: "Prêt pour de nouveaux défis technologiques." }
+];

@@ -25,7 +25,7 @@ body {
 /* 3. Structure principale */
 .gameboy-container {
     width: 350px;
-    height: 650px; /* Légèrement agrandi pour accueillir les nouveaux boutons */
+    height: 650px;
     background: var(--bg-dark);
     border: 12px solid var(--gameboy-grey);
     border-radius: 25px;
@@ -68,6 +68,69 @@ body {
     height: 10px;
     margin-bottom: 10px;
     background: linear-gradient(to right, var(--color-pres), var(--color-divert), var(--color-parcours));
+}
+
+/* Styles pour les onglets dynamiques */
+.tab-content {
+    padding: 10px;
+    color: white;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Styles pour le parcours défilant */
+.parcours-card {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.badge {
+    background: var(--color-parcours);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.counter {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--gameboy-grey);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Styles pour la section Divertissement */
+.divertissement-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.divertissement-content li {
+    background: #1a1a1a;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid var(--color-divert);
+}
+
+.divertissement-content li strong {
+    color: var(--color-divert);
 }
 
 /* 6. Console Container (Le nouveau bas de page) */
