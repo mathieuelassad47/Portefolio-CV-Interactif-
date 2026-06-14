@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Interactif</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="gameboy-container">
+        <header class="menu-top">
+            <button onclick="loadSection('presentation')">Présentation</button>
+            <button onclick="loadSection('parcours')">Parcours</button>
+            <button onclick="loadSection('divertissement')">Divertissement</button>
+        </header>
+
+        <main id="screen-display">
+            <div class="visualizer"></div>
+            <div id="content">
+                <h1>Bienvenue</h1>
+            </div>
+        </main>
+
+        <footer class="console-container">
+            <div class="top-row">
+                <button class="btn-action purple" onclick="loadSection('contact')">CONTACT</button>
+                <button class="btn-action blue" onclick="loadSection('entreprise')">ENTREPRISE</button>
+            </div>
+            
+            <div class="bottom-row">
+                <button class="btn-nav" onclick="prev()">PRÉC.</button>
+                <button class="btn-play" onclick="playPause()">PLAY / PAUSE</button>
+                <button class="btn-nav" onclick="next()">SUIV.</button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
