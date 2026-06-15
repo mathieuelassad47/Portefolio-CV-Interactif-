@@ -7,95 +7,86 @@
 </head>
 <body>
 
-    <div id="intro-screen" class="intro-screen" onclick="startPortfolio()">
-        <h1 class="glitch-text">
-            <span class="m-green">M</span><span class="a-blue">a</span><span class="t-red">t</span><span class="t2-yellow">t</span>
-            <span>&nbsp;</span>
-            <span class="d-purple">D</span><span class="i-blue">i</span><span class="z-green">z</span><span class="a2-yellow">a</span><span class="i2-red">i</span><span class="r-blue">r</span><span class="ex-black">!</span>
-        </h1>
-        <div class="press-start">PRESS START</div>
-    </div>
+    <div class="gameboy-container">
+        <header class="menu-top">
+            <button onclick="loadSection('presentation')">Présentation</button>
+            <button onclick="loadSection('parcours')">Parcours</button>
+            <button onclick="loadSection('divertissement')">Divertissement</button>
+        </header>
 
-    <div class="portfolio-wrapper" id="main-portfolio" style="display:none;">
-        
-        <div class="gameboy-container">
+        <main id="screen-display">
+            <div class="visualizer"></div>
             
-            <aside class="gameboy-left-panel">
-                <div class="d-pad"></div>
-                <div class="pokedex-indicator">
-                    <div id="red-light" class="light"></div>
-                    <div id="yellow-light" class="light"></div>
-                    <div id="green-light" class="light"></div>
+            <section id="presentation" class="tab-content">
+                <h1>Matt Dizair ! ( El assad Mathieu )</h1>
+                <p>
+                    Mon parcours est avant tout le reflet d'une grande <strong>adaptabilité</strong>. 
+                    De la rigueur millimétrée de la cuisine à la gestion dynamique d'une buvette, en passant 
+                    par la force logistique du déménagement et l'art de capter une foule en tant que DJ, 
+                    chaque étape a façonné ma vision du travail.
+                </p>
+                <p>
+                    Aujourd'hui, je transforme cette expérience humaine et terrain en une expertise numérique. 
+                    Je ne suis pas qu'un développeur : je suis un créateur de solutions qui comprend 
+                    l'importance du service client, de l'organisation et du rythme. Ma force réside 
+                    dans ce mélange entre une approche pragmatique, héritée du monde réel, et une 
+                    passion pour la logique du code et l'immersion technologique.
+                </p>
+                <p>
+                    <em>"Un développeur qui a le sens du service, le rythme de la musique et la rigueur du chef."</em>
+                </p>
+            </section>
+
+            <section id="parcours" class="tab-content" style="display:none;">
+                <div class="parcours-card" id="parcours-card"></div>
+                
+                <div class="progress-wrapper">
+                    <div class="gradient-bar"></div>
+                    <input type="range" id="parcours-slider" min="1" max="15" value="1" oninput="updateParcoursFromSlider(this.value)">
                 </div>
-                <div class="decoration-strip"></div>
-            </aside>
+            </section>
 
-            <div class="gameboy-content">
-                <header class="menu-top">
-                    <button onclick="loadSection('presentation')">Présentation</button>
-                    <button onclick="loadSection('parcours')">Parcours</button>
-                    <button onclick="loadSection('divertissement')">Divertissement</button>
-                </header>
-
-                <main id="screen-display">
-                    <div id="screen-content" style="opacity: 0; transition: opacity 0.2s ease;">
-                        <div class="visualizer"></div>
-                        
-                        <section id="presentation" class="tab-content">
-                            <h1>Matt Dizair ! ( El assad Mathieu )</h1>
-                            <div id="text-content">
-                                <p>Mon parcours est avant tout le reflet d'une grande <strong>adaptabilité</strong>. De la rigueur millimétrée de la cuisine à la gestion dynamique d'une buvette, en passant par la force logistique du déménagement et l'art de capter une foule en tant que DJ, chaque étape a façonné ma vision du travail.</p>
-                                <p>Aujourd'hui, je transforme cette expérience humaine et terrain en une expertise numérique. Je ne suis pas qu'un développeur : je suis un créateur de solutions qui comprend l'importance du service client, de l'organisation et du rythme. Ma force réside dans ce mélange entre une approche pragmatique, héritée du monde réel, et une passion pour la logique du code et l'immersion technologique.</p>
-                                <p><em>"Un développeur qui a le sens du service, le rythme de la musique et la rigueur du chef."</em></p>
-                            </div>
-                        </section>
-
-                        <section id="parcours" class="tab-content" style="display:none;">
-                            <div class="parcours-card" id="parcours-card"></div>
-                            <div class="progress-wrapper">
-                                <div class="gradient-bar"></div>
-                                <input type="range" id="parcours-slider" min="1" max="15" value="1" oninput="updateParcoursFromSlider(this.value)">
-                            </div>
-                        </section>
-
-                        <section id="divertissement" class="tab-content" style="display:none;">
-                            <h1>PASSIONS</h1>
-                            <div class="divertissement-content">
-                                <div class="card-3d">
-                                    <strong>CUISINIER</strong>
-                                    <p>La cuisine reste mon laboratoire créatif. Créer des plats est pour moi une forme de code physique : mélange d'ingrédients, précision et timing.</p>
-                                </div>
-                                <div class="card-3d">
-                                    <strong>ANIMATEUR DJ</strong>
-                                    <p>Ancienne vie de DJ oblige, je passe beaucoup de temps à explorer de nouveaux sons et à comprendre comment une ambiance sonore influence les émotions.</p>
-                                </div>
-                                <div class="card-3d">
-                                    <strong>JEUX RÉTRO</strong>
-                                    <p>J'adore l'esthétique et la mécanique des jeux rétro. C'est là que j'ai appris la patience et la satisfaction de réussir un niveau difficile.</p>
-                                </div>
-                                <div class="card-3d">
-                                    <strong>DÉVELOPPEMENT et LE NUMÉRIQUE</strong>
-                                    <p>De simple joueur à créateur : en 8 mois, j'ai transformé cette passion pour la logique en un métier. Le développement est devenu mon terrain de jeu favori.</p>
-                                </div>
-                            </div>
-                        </section>
+            <section id="divertissement" class="tab-content" style="display:none;">
+                <h1>PASSIONS</h1>
+                <div class="divertissement-content">
+                    <p>En dehors du clavier, voici ce qui fait battre mon rythme :</p>
+                    
+                    <div class="card-3d">
+                        <strong> CUISINIER </strong>
+                        <p>La cuisine reste mon laboratoire créatif. Créer des plats est pour moi une forme de code physique : mélange d'ingrédients, précision et timing.</p>
                     </div>
-                </main>
 
-                <footer class="console-container">
-                    <div class="top-row">
-                        <button class="btn-action purple" onclick="loadSection('contact')">CONTACT</button>
-                        <button class="btn-action green" onclick="loadSection('projets')">PROJETS</button>
-                        <button class="btn-action blue" onclick="loadSection('entreprise')">ENTREPRISE</button>
+                    <div class="card-3d">
+                        <strong>ANIMATEUR DJ</strong>
+                        <p>Ancienne vie de DJ oblige, je passe beaucoup de temps à explorer de nouveaux sons et à comprendre comment une ambiance sonore influence les émotions.</p>
                     </div>
-                    <div class="bottom-row">
-                        <button class="btn-nav" onclick="prev()">PRÉC.</button>
-                        <button class="btn-play" onclick="playPause()">PLAY / PAUSE</button>
-                        <button class="btn-nav" onclick="next()">SUIV.</button>
+
+                    <div class="card-3d">
+                        <strong>JEUX RÉTRO</strong>
+                        <p>J'adore l'esthétique et la mécanique des jeux rétro. C'est là que j'ai appris la patience et la satisfaction de réussir un niveau difficile.</p>
                     </div>
-                </footer>
+
+                    <div class="card-3d">
+                        <strong>DEVELOPPEMENT et LE NUMERIQUE </strong>
+                        <p>De simple joueur à créateur : en 8 mois, j'ai transformé cette passion pour la logique en un métier. Le développement est devenu mon terrain de jeu favori où chaque ligne de code est une quête vers l'excellence.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="console-container">
+            <div class="top-row">
+                <button class="btn-action purple" onclick="loadSection('contact')">CONTACT</button>
+                <button class="btn-action green" onclick="loadSection('projets')">PROJETS</button>
+                <button class="btn-action blue" onclick="loadSection('entreprise')">ENTREPRISE</button>
             </div>
-        </div>
+            
+            <div class="bottom-row">
+                <button class="btn-nav" onclick="prev()">PRÉC.</button>
+                <button class="btn-play" onclick="playPause()">PLAY / PAUSE</button>
+                <button class="btn-nav" onclick="next()">SUIV.</button>
+            </div>
+        </footer>
     </div>
 
     <script src="script.js"></script>

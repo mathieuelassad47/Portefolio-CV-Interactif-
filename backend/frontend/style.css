@@ -22,29 +22,23 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
-/* --- STRUCTURE PRINCIPALE GAMEBOY --- */
-.gameboy-container {
-    width: 600px;
-    height: 650px;
-    background: var(--bg-dark);
-    border: 12px solid var(--gameboy-grey);
-    border-radius: 25px;
+/* --- WRAPPER GLOBAL --- */
+.portfolio-wrapper {
     display: flex;
-    flex-direction: row; /* Aligne le panneau gauche et la partie droite */
-    align-items: flex-start; /* Aligne les éléments en haut */
-    padding: 20px;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    padding: 20px;
 }
 
 /* --- PANNEAU GAUCHE DÉCORATIF --- */
 .gameboy-left-panel {
-    width: 150px;
+    width: 150px; 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 10px 0;
+    gap: 40px;
+    padding: 20px;
 }
 
 .d-pad {
@@ -67,17 +61,16 @@ body {
 .pokedex-indicator {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 10px 5px;
+    gap: 15px;
+    padding: 15px 5px;
     background: #000;
-    border-radius: 4px;
+    border-radius: 5px;
     border: 2px solid #555;
-    width: 25px; 
 }
 
 .light {
-    width: 12px;
-    height: 12px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     background: #333;
     transition: background 0.3s, box-shadow 0.3s;
@@ -87,12 +80,62 @@ body {
 .light.yellow-on { background: #ffff00; box-shadow: 0 0 10px #ffff00; }
 .light.green-on { background: #00ff00; box-shadow: 0 0 10px #00ff00; }
 
-/* --- CONTENEUR CONSOLE DROITE (ÉCRAN) --- */
-.gameboy-content {
-    flex: 1; /* Permet à la partie droite de prendre l'espace restant */
+/* --- ÉCRAN D'INTRODUCTION --- */
+.intro-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2000;
+    cursor: pointer;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    justify-content: center;
+    align-items: center;
+    animation: bootUp 1.5s ease-out forwards;
+}
+
+@keyframes bootUp {
+    0% { opacity: 0; filter: brightness(0); }
+    50% { opacity: 0.5; filter: brightness(2); }
+    100% { opacity: 1; filter: brightness(1); }
+}
+
+.glitch-text {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 3rem;
+    display: flex;
+    gap: 8px;
+    transform: skewX(-10deg);
+    text-transform: uppercase;
+}
+
+.m-green { color: #88C834; }
+.a-blue { color: #153E92; }
+.t-red { color: #D72424; }
+.t2-yellow { color: #E9D514; }
+.d-purple { color: #9999A4; }
+.i-blue { color: #153E92; }
+.z-green { color: #88C834; }
+.a2-yellow { color: #E9D514; }
+.i2-red { color: #D72424; }
+.r-blue { color: #153E92; }
+.ex-black { color: #000000; }
+
+.press-start { color: #333; margin-top: 50px; font-weight: bold; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* --- STRUCTURE PRINCIPALE GAMEBOY --- */
+.gameboy-container {
+    width: 350px;
+    height: 650px;
+    background: var(--bg-dark);
+    border: 12px solid var(--gameboy-grey);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 .menu-top { display: flex; justify-content: space-between; margin-bottom: 20px; }
@@ -104,6 +147,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 0 #7f8c8d;
+    transition: transform 0.1s;
 }
 
 #screen-display {
@@ -130,4 +174,39 @@ body {
     z-index: 2;
 }
 
-/*
+.visualizer { height: 10px; margin-bottom: 10px; background: linear-gradient(to right, var(--color-pres), var(--color-divert), var(--color-parcours)); }
+
+/* Sections */
+.tab-content { padding: 10px; color: white; animation: fadeIn 0.3s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.parcours-card { height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+.progress-wrapper { position: relative; width: 100%; height: 10px; margin-top: 20px; background: #000; }
+.gradient-bar { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, var(--color-pres), var(--color-divert), var(--color-parcours)); }
+#parcours-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; appearance: none; background: transparent; cursor: pointer; }
+
+.divertissement-content { display: flex; flex-direction: column; gap: 15px; }
+.card-3d { background: #1a1a1a; padding: 15px; border-radius: 10px; border: 2px solid #333; box-shadow: 0 6px 0 #000; transition: transform 0.1s; color: #ddd; }
+.card-3d strong { display: block; color: var(--color-divert); margin-bottom: 5px; }
+
+/* --- FOOTER & BOUTONS D'ACTION --- */
+.console-container { display: flex; flex-direction: column; gap: 15px; padding: 10px; background: #2a2a2a; border-radius: 10px; }
+.top-row, .bottom-row { display: flex; justify-content: space-between; gap: 8px; width: 100%; }
+
+.btn-action {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 0 #000;
+    flex: 1;
+    font-size: 11px;
+}
+
+.btn-action.purple { background-color: #8e44ad; }
+.btn-action.green { background-color: #27ae60; }
+.btn-action.blue { background-color: #2980b9; }
+
+.btn-nav, .btn-play { flex: 1; padding: 10px 5px; font-size: 11px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 0 #000; }
