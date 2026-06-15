@@ -5,8 +5,8 @@
     --color-parcours: #E74C3C;
     --color-divert: #27AE60;
     --color-contact: #F1C40F;
-    --color-culture: #8E44AD; /* Violet */
-    --color-tarif: #2980B9;   /* Bleu */
+    --color-culture: #8E44AD; 
+    --color-tarif: #2980B9;   
     --gameboy-grey: #BDC3C7;
     --screen-bg: #000;
 }
@@ -17,31 +17,85 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     font-family: 'Courier New', Courier, monospace;
 }
 
-/* 3. Structure principale */
+/* --- STRUCTURE PRINCIPALE GAMEBOY --- */
 .gameboy-container {
-    width: 350px;
+    width: 600px;
     height: 650px;
     background: var(--bg-dark);
     border: 12px solid var(--gameboy-grey);
     border-radius: 25px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Aligne le panneau gauche et la partie droite */
+    align-items: flex-start; /* Aligne les éléments en haut */
     padding: 20px;
+    gap: 20px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-/* 4. Navigation Haut */
-.menu-top {
+/* --- PANNEAU GAUCHE DÉCORATIF --- */
+.gameboy-left-panel {
+    width: 150px;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
 }
 
+.d-pad {
+    background-image: url('image_ae2ceb.png');
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.decoration-strip {
+    background-image: url('image_ae290a.png');
+    width: 40px;
+    height: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* --- INDICATEUR POKÉDEX --- */
+.pokedex-indicator {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 5px;
+    background: #000;
+    border-radius: 4px;
+    border: 2px solid #555;
+    width: 25px; 
+}
+
+.light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #333;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.light.red-on { background: #ff0000; box-shadow: 0 0 10px #ff0000; }
+.light.yellow-on { background: #ffff00; box-shadow: 0 0 10px #ffff00; }
+.light.green-on { background: #00ff00; box-shadow: 0 0 10px #00ff00; }
+
+/* --- CONTENEUR CONSOLE DROITE (ÉCRAN) --- */
+.gameboy-content {
+    flex: 1; /* Permet à la partie droite de prendre l'espace restant */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.menu-top { display: flex; justify-content: space-between; margin-bottom: 20px; }
 .menu-top button {
     background-color: var(--gameboy-grey);
     border: none;
@@ -50,11 +104,10 @@ body {
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 0 #7f8c8d;
-    transition: transform 0.1s;
 }
 
-/* 5. Écran et Visualiseur */
 #screen-display {
+    position: relative; 
     flex-grow: 1;
     background-color: var(--screen-bg);
     color: #2ecc71;
@@ -64,110 +117,17 @@ body {
     overflow-y: auto;
 }
 
-.visualizer {
-    height: 10px;
-    margin-bottom: 10px;
-    background: linear-gradient(to right, var(--color-pres), var(--color-divert), var(--color-parcours));
+/* Effet Scanline */
+#screen-display::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 2;
 }
 
-/* Styles pour les onglets dynamiques */
-.tab-content {
-    padding: 10px;
-    color: white;
-    animation: fadeIn 0.3s;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Styles pour le parcours défilant */
-.parcours-card {
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    animation: slideIn 0.3s ease-out;
-}
-
-.badge {
-    background: var(--color-parcours);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.8em;
-    margin-bottom: 10px;
-    color: white;
-}
-
-.counter {
-    margin-top: 20px;
-    text-align: center;
-    font-weight: bold;
-    color: var(--gameboy-grey);
-}
-
-@keyframes slideIn {
-    from { transform: translateX(50px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-/* Styles pour la section Divertissement */
-.divertissement-content ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.divertissement-content li {
-    background: #1a1a1a;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border-left: 4px solid var(--color-divert);
-}
-
-.divertissement-content li strong {
-    color: var(--color-divert);
-}
-
-/* 6. Console Container (Le nouveau bas de page) */
-.console-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 10px;
-    background: #2a2a2a;
-    border-radius: 10px;
-}
-
-.top-row, .bottom-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-/* Boutons 3D tactiles */
-.btn-action, .btn-nav, .btn-play {
-    padding: 12px 10px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s;
-    box-shadow: 0 4px 0 #000;
-}
-
-/* Couleurs spécifiques */
-.purple { background-color: var(--color-culture); color: white; }
-.blue { background-color: var(--color-tarif); color: white; }
-.btn-play { background-color: #16a085; color: white; box-shadow: 0 4px 0 #0a4d3f; }
-.btn-nav { background-color: #bdc3c7; color: #2c3e50; box-shadow: 0 4px 0 #7f8c8d; }
-
-/* Effet de clic (le bouton s'enfonce) */
-.btn-action:active, .btn-nav:active, .btn-play:active {
-    transform: translateY(4px);
-    box-shadow: 0 0px 0 #000;
-}
+/*

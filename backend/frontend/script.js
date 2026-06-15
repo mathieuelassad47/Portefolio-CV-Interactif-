@@ -1,4 +1,31 @@
-// 1. Données de ton parcours
+// --- 1. Gestion de la Transition et Allumage ---
+function startPortfolio() {
+    // Jouer le son de démarrage
+    const audio = new Audio('startup.mp3'); 
+    audio.play().catch(e => console.log("Lecture audio bloquée : interaction requise."));
+    
+    // Récupération des éléments DOM
+    const intro = document.getElementById('intro-screen');
+    const main = document.getElementById('main-portfolio');
+    const screen = document.getElementById('screen-display');
+    const content = document.getElementById('screen-content');
+    
+    // 1. Masquer l'intro et afficher le conteneur principal
+    intro.style.display = 'none';
+    main.style.display = 'flex';
+
+    // 2. Lancer l'effet visuel sur l'écran (animation CSS)
+    screen.classList.add('boot-sequence');
+
+    // 3. Charger le texte et le rendre visible après le "flash" d'allumage (400ms)
+    setTimeout(() => {
+        content.style.opacity = '1'; 
+        loadSection('presentation');
+        screen.classList.remove('boot-sequence');
+    }, 400); 
+}
+
+// --- 2. Données du parcours ---
 const monParcours = [
     { id: 1, title: "CAP Cuisine", desc: "La rigueur, l'organisation et la maîtrise des bases culinaires." },
     { id: 2, title: "Bac Pro Service Accueil", desc: "Apprentissage du relationnel client et de la gestion de flux." },
@@ -17,56 +44,98 @@ const monParcours = [
     { id: 15, title: "Objectif Développeur", desc: "Prêt pour de nouveaux défis technologiques." }
 ];
 
-// État du défilement manuel
+// --- 3. État de l'application ---
 let currentIndex = 0;
+let isAutoPlaying = false;
+let playInterval = null;
 
-// 2. Fonction principale de navigation (Onglets)
+// --- 4. Fonction de rendu du parcours ---
+function renderParcoursStep(index) {
+    const card = document.getElementById('parcours-card');
+    const item = monParcours[index];
+    
+    if (card) {
+        card.innerHTML = `
+            <div class="badge">Niveau ${item.id}</div>
+            <h2>${item.title}</h2>
+            <p>${item.desc}</p>
+            <div class="counter">${index + 1} / ${monParcours.length}</div>
+        `;
+    }
+    
+    const slider = document.getElementById('parcours-slider');
+    if (slider) slider.value = index + 1;
+}
+
+// --- 5. Navigation des sections ---
 function loadSection(sectionId) {
-    const sections = document.querySelectorAll('.tab-content');
-    sections.forEach(sec => sec.style.display = 'none');
-
+    document.querySelectorAll('.tab-content').forEach(sec => sec.style.display = 'none');
     const target = document.getElementById(sectionId);
     if (target) {
         target.style.display = 'block';
-    }
-
-    // Si on clique sur parcours, on initialise l'affichage manuel
-    if (sectionId === 'parcours') {
-        currentIndex = 0; // On recommence au début
-        updateParcoursView();
+        if (sectionId === 'parcours') renderParcoursStep(currentIndex);
     }
 }
 
-// 3. Mise à jour de l'affichage du parcours (Défilement manuel)
-function updateParcoursView() {
-    const parcoursContainer = document.getElementById('parcours');
-    const item = monParcours[currentIndex];
-    
-    parcoursContainer.innerHTML = `
-        <div class="parcours-card">
-            <span class="badge">Niveau ${item.id}</span>
-            <h2>${item.title}</h2>
-            <p>${item.desc}</p>
-        </div>
-        <div class="counter">${currentIndex + 1} / ${monParcours.length}</div>
-    `;
+// --- 6. Navigation interactive (Slider et Boutons) ---
+function updateParcoursFromSlider(value) {
+    currentIndex = parseInt(value) - 1;
+    isAutoPlaying = false;
+    clearInterval(playInterval);
+    renderParcoursStep(currentIndex);
 }
 
-// 4. Fonctions de contrôle de la console
-function prev() { 
+function prev() {
     if (currentIndex > 0) {
         currentIndex--;
-        updateParcoursView();
+        renderParcoursStep(currentIndex);
     }
 }
 
-function next() { 
+function next() {
     if (currentIndex < monParcours.length - 1) {
         currentIndex++;
-        updateParcoursView();
+        renderParcoursStep(currentIndex);
     }
 }
 
-function playPause() { 
-    console.log("Lecture/Pause de la bande son"); 
+// --- 7. Lecture automatique ---
+function playPause() {
+    isAutoPlaying = !isAutoPlaying;
+    
+    if (isAutoPlaying) {
+        playInterval = setInterval(() => {
+            if (currentIndex < monParcours.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; 
+            }
+            renderParcoursStep(currentIndex);
+        }, 2000);
+    } else {
+        clearInterval(playInterval);
+    }
 }
+
+// --- 8. Initialisation et Détection Pokédex ---
+document.addEventListener('DOMContentLoaded', () => {
+    renderParcoursStep(currentIndex);
+
+    // Initialisation des éléments pour le Pokédex
+    const display = document.getElementById('screen-display');
+    const redLight = document.getElementById('red-light');
+    const yellowLight = document.getElementById('yellow-light');
+    const greenLight = document.getElementById('green-light');
+
+    if (display) {
+        display.addEventListener('scroll', () => {
+            // Calcul du pourcentage de défilement
+            const scrollPercent = (display.scrollTop / (display.scrollHeight - display.clientHeight)) * 100;
+
+            // Logique sensorielle Pokédex
+            if (redLight && scrollPercent >= 10) redLight.classList.add('red-on');
+            if (yellowLight && scrollPercent >= 50) yellowLight.classList.add('yellow-on');
+            if (greenLight && scrollPercent >= 95) greenLight.classList.add('green-on');
+        });
+    }
+});
