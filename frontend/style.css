@@ -1,0 +1,142 @@
+/* --- 1. MISE EN PAGE GLOBALE --- */
+body {
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* --- 2. STRUCTURE PRINCIPALE (Style Switch) --- */
+.gameboy-container {
+    width: 400px;
+    background: #2C3E50;
+    padding: 25px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 2px solid #34495E;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 3. EFFETS BOUTONS (3D Tactile & Hover) --- */
+button, .contact-btn {
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: 0 4px 0 #1b2631;
+}
+
+/* Effet au clic (Enfoncé) */
+button:active, .contact-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 #1b2631;
+}
+
+/* Effet de survol (Se soulève légèrement) */
+button:hover, .contact-btn:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.2);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* --- 4. MENU POKÉDEX (LED Style + 3D) --- */
+.menu-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.menu-top button {
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 10px;
+    color: white;
+}
+
+.menu-top button:nth-child(1) { background: #E74C3C; box-shadow: 0 4px 0 #C0392B; }
+.menu-top button:nth-child(2) { background: #3498DB; box-shadow: 0 4px 0 #2980B9; }
+.menu-top button:nth-child(3) { background: #F1C40F; box-shadow: 0 4px 0 #D4AC0D; }
+.menu-top button:nth-child(4) { background: #27AE60; box-shadow: 0 4px 0 #1E8449; }
+
+/* --- 5. ÉCRAN & CONTENU --- */
+#screen {
+    background: #000;
+    height: 320px;
+    border-radius: 15px;
+    border: 6px solid #1a1a1a;
+    padding: 15px;
+    color: #00FF41;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+}
+
+.content-block {
+    transition: transform 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.content-block:hover {
+    transform: scale(1.02);
+    border: 2px solid #00FF41;
+}
+
+/* Grille de Contact */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.contact-btn {
+    background: #34495E;
+    color: #fff;
+    padding: 15px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 2px solid #2C3E50;
+}
+
+.contact-btn.email {
+    grid-column: span 2;
+    background: #E74C3C;
+    box-shadow: 0 4px 0 #C0392B;
+}
+
+/* Style Photo GBC */
+.photo-frame { display: flex; justify-content: center; margin: 15px 0; }
+.lcd-screen {
+    width: 120px; height: 120px;
+    background: #9BBC0F;
+    border: 6px solid #333;
+    border-radius: 8px;
+    display: flex; justify-content: center; align-items: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+.profile-pic { width: 90%; height: 90%; object-fit: cover; border: 2px solid #222; }
+
+.slide { display: none; text-align: center; }
+.slide.active { display: block; }
+#slides-container { min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* --- 6. CONTRÔLES FOOTER --- */
+.console-controls { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+.top-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.top-row button { padding: 12px; background: #FFFFFF; font-weight: 800; border-radius: 8px; }
+.bottom-row { display: flex; justify-content: space-between; margin-top: 10px; align-items: center; }
+
+.nav-btn { width: 70px; height: 70px; border-radius: 50%; background: #34495E !important; color: white !important; }
+.nav-btn:active { box-shadow: inset 0 2px 5px rgba(0,0,0,0.8); }
+
+.play-btn { border-radius: 15px !important; padding: 10px 25px; background: #E74C3C !important; color: white !important; font-weight: bold; }

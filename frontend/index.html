@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Pokédex Portfolio</title>
+</head>
+<body>
+
+<div class="gameboy-container">
+    <header class="menu-top">
+        <button onclick="showSection('presentation')">Présentation</button>
+        <button onclick="showSection('personality')">Personnalité</button>
+        <button onclick="showSection('parcours')">Parcours</button>
+        <button onclick="showSection('divertissement')">Divertissement</button>
+    </header>
+
+    <main id="screen">
+        <div id="presentation" class="content">
+            <h2 style="color: #f8fdfa; font-size: 1.2rem;">QUI JE SUIS </h2>
+            <p><strong>NOM :</strong> Matt DIZAIR( Mathieu El assad ) <br>
+               <strong>DATE DE NAISSANCE :</strong> 04/11/1990<br>
+               <strong>LOCALISATION : </strong> Agen (47), FRANCE</p>
+            
+            <div class="photo-frame">
+                <div class="lcd-screen">
+                    <img src="votre-photo.jpg" alt="Matt" class="profile-pic">
+                </div>
+            </div>
+
+            <p style="margin-top: 15px;">Créateur de solutions numériques immersives. Passionné par l'intersection entre le design rétro-gaming et le développement web moderne.</p>
+        </div>
+
+        <div id="personality" class="content" style="display:none;">
+            <h2 style="color: #306d8b; font-size: 1.2rem;"> MON PROFIL </h2>
+            <ul style="list-style-type: none; padding: 0; color: #fff; font-size: 0.9rem;">
+                <li style="margin-bottom: 5px;"><strong>> Rigueur :</strong> L'organisation avant tout.</li>
+                <li style="margin-bottom: 5px;"><strong>> Curiosité :</strong> Apprendre en continu.</li>
+                <li style="margin-bottom: 5px;"><strong>> Esprit d'équipe :</strong> Collaboration efficace.</li>
+                <li style="margin-bottom: 5px;"><strong>> Persévérance :</strong> Focus sur les objectifs.</li>
+            </ul>
+            <p style="font-size: 0.8rem; font-style: italic; margin-top: 10px;">"Je transforme les problèmes en solutions avec une approche méthodique."</p>
+        </div>
+
+        <div id="parcours" class="content" style="display:none;">
+            <h2 style="color: #F1C40F; text-align: center; font-size: 1.2rem;"> PARCOURS </h2>
+            <div id="slides-container" style="min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff;">
+                <div class="slide active" data-index="1"><h3>1. CAP Cuisine</h3><p>Rigueur et gestion du stress.</p></div>
+                <div class="slide" style="display:none;" data-index="2"><h3>2. BAC PRO Accueil</h3><p>Relation client et service.</p></div>
+                <div class="slide" style="display:none;" data-index="3"><h3>3. Buvette Montreurs d'Images</h3><p>Gestion d'événementiel.</p></div>
+                <div class="slide" style="display:none;" data-index="4"><h3>4. Déménageur</h3><p>Logistique et esprit d'équipe.</p></div>
+                <div class="slide" style="display:none;" data-index="5"><h3>5. DJ Événementiel</h3><p>Technique sonore et ambiance.</p></div>
+                <div class="slide" style="display:none;" data-index="6"><h3>6. Développeur Web</h3><p>Architecture numérique.</p></div>
+            </div>
+        </div>
+
+        <div id="divertissement" class="content" style="display:none;">
+            <h2 style="color: #27AE60; font-size: 1.2rem;"> Mes talents cachés </h2>
+            <ul style="list-style-type: none; padding: 0; color: #fff; font-size: 0.9rem;">
+                <li style="margin-bottom: 8px;"><strong>> CUISINE :</strong> Création de plats savoureux et esthétiques.</li>
+                <li style="margin-bottom: 8px;"><strong>> MIX & AUDIO :</strong> DJ Événementiel.</li>
+                <li style="margin-bottom: 8px;"><strong>> RÉTRO-GAMING :</strong> Passionné par le design pixelisé.</li>
+                <li style="margin-bottom: 8px;"><strong>> CRÉATION :</strong> Interfaces immersives.</li>
+                <li style="margin-bottom: 8px;"><strong>> CULTURE :</strong> Nouvelles inspirations.</li>
+            </ul>
+        </div>
+        
+        <div id="contact" class="content" style="display:none;">
+            <h2 style="color: #E74C3C; font-size: 1.2rem; text-align: center;">[ CONTACT ]</h2>
+            <div class="contact-grid">
+                <a href="#" class="contact-btn">LinkedIn</a>
+                <a href="#" class="contact-btn">GitHub</a>
+                <a href="#" class="contact-btn">Instagram</a>
+                <a href="#" class="contact-btn">TikTok</a>
+                <a href="mailto:votre.email@exemple.com" class="contact-btn email">E-mail</a>
+            </div>
+        </div>
+
+        <div id="projets" class="content" style="display:none;"><h1>Projets</h1></div>
+        <div id="entreprise" class="content" style="display:none;"><h1>Entreprise</h1></div>
+        <div id="formation" class="content" style="display:none;"><h1>Formation</h1></div>
+    </main>
+
+    <footer class="console-controls">
+        <div class="top-row">
+            <button onclick="showSection('contact')">CONTACT</button>
+            <button onclick="showSection('projets')">PROJETS</button>
+            <button onclick="showSection('entreprise')">ENTREPRISE</button>
+            <button onclick="showSection('formation')">FORMATION</button>
+        </div>
+        <div class="bottom-row">
+            <button class="nav-btn" onclick="changeSlide(-1)">PRÉC.</button>
+            <button class="play-btn">PLAY / PAUSE</button>
+            <button class="nav-btn" onclick="changeSlide(1)">SUIV.</button>
+        </div>
+    </footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
