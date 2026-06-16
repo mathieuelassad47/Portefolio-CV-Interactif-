@@ -20,6 +20,7 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: 'Courier New', Courier, monospace;
+    touch-action: manipulation;
 }
 
 /* --- WRAPPER GLOBAL --- */
@@ -29,6 +30,19 @@ body {
     align-items: center;
     gap: 20px;
     padding: 20px;
+}
+
+/* --- ANIMATION TIMER (Intégrée) --- */
+.timer-display {
+    animation: timerAnimation 1500s linear forwards; /* 25 minutes = 1500s */
+}
+
+@keyframes timerAnimation {
+  0% { content: url('image1.png'); }
+  0.16% { content: url('image2.png'); }
+  0.33% { content: url('image3.png'); }
+  /* ... continuez pour les 600 étapes ... */
+  100% { content: url('image600.png'); }
 }
 
 /* --- PANNEAU GAUCHE DÉCORATIF --- */
@@ -110,6 +124,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Couleurs Glitch */
 .m-green { color: #88C834; }
 .a-blue { color: #153E92; }
 .t-red { color: #D72424; }
@@ -138,12 +153,19 @@ body {
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-.menu-top { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.menu-top { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 20px; 
+    gap: 5px; 
+}
+
 .menu-top button {
     background-color: var(--gameboy-grey);
     border: none;
     border-radius: 8px;
-    padding: 10px;
+    padding: 10px 5px; 
+    font-size: 0.7rem;
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 0 #7f8c8d;
@@ -180,14 +202,96 @@ body {
 .tab-content { padding: 10px; color: white; animation: fadeIn 0.3s; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-.parcours-card { height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
-.progress-wrapper { position: relative; width: 100%; height: 10px; margin-top: 20px; background: #000; }
-.gradient-bar { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, var(--color-pres), var(--color-divert), var(--color-parcours)); }
-#parcours-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; appearance: none; background: transparent; cursor: pointer; }
+/* --- GESTION PARCOURS & IMAGES --- */
+.parcours-image-container {
+    width: 100%;
+    max-height: 150px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameboy-artwork {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    display: block;
+}
+
+#parcours-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 10px;
+}
+
+#parcours-card p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 5px 0;
+    color: #ddd;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-bottom: 10px;
+}
+
+/* --- BARRE DE PROGRESSION --- */
+.progress-wrapper { 
+    position: relative; 
+    width: 100%; 
+    height: 8px; 
+    margin-top: 20px; 
+    background: #000; 
+    border: 1px solid #333;
+}
+
+.static-gradient-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, 
+        #FF0000, #FF7F00, #FFFF00, 
+        #00FF00, #0000FF, #4B0082, #8B00FF);
+    border-radius: 4px;
+}
 
 .divertissement-content { display: flex; flex-direction: column; gap: 15px; }
 .card-3d { background: #1a1a1a; padding: 15px; border-radius: 10px; border: 2px solid #333; box-shadow: 0 6px 0 #000; transition: transform 0.1s; color: #ddd; }
 .card-3d strong { display: block; color: var(--color-divert); margin-bottom: 5px; }
+
+/* --- PLATEFORMES DE CONTACT --- */
+.platforms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+    margin-top: 15px;
+    max-height: 300px; 
+    overflow-y: auto;  
+}
+
+.platform-link {
+    display: block;
+    background-color: #333;
+    color: #fff;
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid #555;
+    font-weight: bold;
+    margin-bottom: 5px;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.platform-link:hover {
+    background-color: #444;
+    border-color: var(--color-contact);
+}
 
 /* --- FOOTER & BOUTONS D'ACTION --- */
 .console-container { display: flex; flex-direction: column; gap: 15px; padding: 10px; background: #2a2a2a; border-radius: 10px; }
@@ -210,3 +314,11 @@ body {
 .btn-action.blue { background-color: #2980b9; }
 
 .btn-nav, .btn-play { flex: 1; padding: 10px 5px; font-size: 11px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 0 #000; }
+
+/* --- ADAPTATION MOBILE --- */
+@media screen and (max-width: 480px) {
+    body { align-items: flex-start; padding-top: 20px; }
+    .portfolio-wrapper { flex-direction: column; width: 100%; padding: 10px; }
+    .gameboy-container { width: 95vw; height: 85vh; margin: 0 auto; border-width: 8px; }
+    .gameboy-left-panel { display: none; }
+}
